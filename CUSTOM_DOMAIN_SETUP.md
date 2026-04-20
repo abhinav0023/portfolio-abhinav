@@ -4,7 +4,7 @@ This guide walks you through hosting this portfolio on your GoDaddy-purchased do
 
 > What this repo includes:
 > - `public/CNAME` → `abhinavhooda.in` (copied into `dist/` on build for the custom domain).
-> - `.github/workflows/deploy.yml` → builds with Vite and deploys **only** `./dist` to GitHub Pages.
+> - `.github/workflows/deploy.yml` → on every push to `main`, builds with Vite and publishes **only** `./dist` to the **`gh-pages`** branch (static output only).
 > - `vite.config.js` → `base: '/'` (required for a custom apex domain; do **not** use `base: '/portfolio-abhinav/'` here).
 > - `public/.nojekyll` → copied to `dist/` so GitHub Pages does not run Jekyll on your static assets.
 
@@ -14,17 +14,20 @@ You still need to do the steps below manually because they involve your GitHub r
 
 ## CRITICAL — Blank page + console: `main.jsx` / MIME type `text/jsx`
 
-That error means the live site is **not** your Vite build. GitHub is serving the **repository root** `index.html`, which still points at `/src/main.jsx` (source). Browsers cannot execute JSX as a module.
+That error means the live site is **not** your Vite build. GitHub Pages is publishing the **`main` branch repo root** (dev `index.html` → `/src/main.jsx`). Browsers cannot run JSX as a module.
 
-**Fix (do this on GitHub — no “paste dist into repo root” needed):**
+**Fix — point Pages at the built site (`gh-pages` branch):**
 
-1. Repo → **Settings** → **Pages**.
-2. Under **Build and deployment** → **Source**, choose **GitHub Actions** (not “Deploy from a branch”).
-3. Repo → **Actions** → open the latest **Deploy to GitHub Pages** run → confirm it is **green**. If it failed, open the logs (often `npm ci` or permissions); fix errors, then **Re-run workflow**.
-4. First time only: if GitHub asks you to **configure** the `github-pages` environment, approve it (**Settings** → **Environments** → `github-pages` → required reviewers off, or approve the pending deployment).
+1. Wait for the workflow **Deploy site to gh-pages** to finish green (**Actions** tab). The first successful run creates the `gh-pages` branch containing only `dist/` output (`/assets/index-….js`, `favicon.svg`, `CNAME`, etc.).
+2. Repo → **Settings** → **Pages**.
+3. Under **Build and deployment** → **Source**, choose **Deploy from a branch** (not “GitHub Actions” for this repo’s setup).
+4. Set **Branch** to **`gh-pages`** and folder **`/ (root)`**, then **Save**.  
+   **Do not** leave **Branch: `main`** with **/(root)** — that is what causes `main.jsx` + MIME errors.
 5. Hard refresh: `Cmd + Shift + R`.
 
-After a correct deploy, **View Page Source** on `https://abhinavhooda.in` should show `<script type="module" … src="/assets/index-….js">`, **not** `/src/main.jsx`. `favicon.svg` should load (it lives in `public/` and is copied to `dist/`).
+After this, **View Page Source** on `https://abhinavhooda.in` should show `<script type="module" … src="/assets/index-….js">`, **not** `/src/main.jsx`.
+
+If you previously set Source to **GitHub Actions** only, switch to **Deploy from a branch** → **`gh-pages`** / **(root)** so the site matches this workflow.
 
 ---
 
@@ -38,13 +41,13 @@ git push origin main
 
 ---
 
-## Step 2 — Enable GitHub Pages with the "GitHub Actions" source
+## Step 2 — Enable GitHub Pages from the `gh-pages` branch
 
 1. Go to your repo: <https://github.com/abhinav0023/portfolio-abhinav>
-2. Click **Settings** → **Pages** (left sidebar).
-3. Under **Build and deployment** → **Source**, select **GitHub Actions**.
-   (Do **not** pick "Deploy from a branch" — the workflow handles it.)
-4. Wait ~1–2 minutes. The workflow you just pushed will run automatically; check the **Actions** tab to confirm it goes green.
+2. Push `main` so **Deploy site to gh-pages** runs (**Actions** tab → wait for green). The first run creates the **`gh-pages`** branch.
+3. **Settings** → **Pages** → **Build and deployment** → **Source** → **Deploy from a branch**.
+4. **Branch:** `gh-pages` / **Folder:** `/ (root)` → **Save**.  
+   Never use **`main` / (root)** for the published site — that serves source files and breaks the app.
 
 ---
 
@@ -148,7 +151,7 @@ The Actions workflow will rebuild `dist/` and redeploy automatically. The `CNAME
 
 | Symptom | Likely cause / fix |
 | --- | --- |
-| Blank page; console: `main.jsx` / MIME `text/jsx` | Pages is serving **repo root** (source). Set **Pages → Source → GitHub Actions**, ensure the deploy workflow succeeds. See **CRITICAL** section above. |
+| Blank page; console: `main.jsx` / MIME `text/jsx` | Pages is publishing **`main` / (root)** (source). Set **Pages → Deploy from a branch → `gh-pages` / (root)** and ensure **Deploy site to gh-pages** workflow is green. See **CRITICAL** section above. |
 | `favicon.svg` 404 | Same as above — wrong folder is being published; built site includes `favicon.svg` at site root. |
 | GitHub keeps saying "Domain's DNS record could not be retrieved" | DNS hasn't propagated yet, or old GoDaddy parked `A`/`CNAME` records still exist. Delete conflicts and wait. |
 | Site loads but assets (CSS/JS) are 404 | Your `vite.config.js` has a non-`/` `base`. For a custom domain it must be `/`. |
@@ -164,4 +167,4 @@ The Actions workflow will rebuild `dist/` and redeploy automatically. The `CNAME
 - **`public/CNAME`** → tells GitHub Pages "this site should be served at `abhinavhooda.in`".
 - **`A` records (apex)** → tell DNS "send `abhinavhooda.in` traffic to GitHub's servers".
 - **`CNAME` record (www)** → tells DNS "`www.abhinavhooda.in` is an alias for `abhinav0023.github.io`".
-- **GitHub Actions workflow** → builds the Vite app and publishes **only** the `dist/` output to Pages on every push to `main` (never commit built files to the repo root for this setup).
+- **GitHub Actions workflow** → builds the Vite app and pushes **only** `dist/` contents to the **`gh-pages`** branch on every push to `main`. Pages must read from **`gh-pages`**, not **`main`**.
