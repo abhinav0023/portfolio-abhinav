@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Space Grotesk", sans-serif;
   --font-display: "Space Grotesk", sans-serif;
@@ -12,14 +14,27 @@
   --color-muted: #C4B5FD;
   --color-border: #000000;
 
-  --shadow-neo-sm: 4px 4px 0px 0px #000;
-  --shadow-neo: 8px 8px 0px 0px #000;
-  --shadow-neo-lg: 12px 12px 0px 0px #000;
+  --shadow-neo-sm: 4px 4px 0px 0px var(--neo-shadow, #000000);
+  --shadow-neo: 8px 8px 0px 0px var(--neo-shadow, #000000);
+  --shadow-neo-lg: 12px 12px 0px 0px var(--neo-shadow, #000000);
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    --neo-shadow: #000000;
+  }
+
+  html.dark {
+    --neo-shadow: #ffffff;
+    --color-background: #000000;
+    --color-foreground: #ffffff;
+    --color-border: #ffffff;
+  }
+
+  html.dark body {
+    background-color: #000000;
+    color: #ffffff;
   }
 
   body {
@@ -29,6 +44,10 @@
     @apply selection:bg-secondary selection:text-foreground;
   }
 
+  html.dark body {
+    @apply selection:text-black;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-black uppercase tracking-tighter leading-[0.85] text-foreground;
   }
@@ -36,12 +55,12 @@
 
 @layer components {
   .neo-btn {
-    @apply border-4 border-black bg-accent text-white px-8 py-4 font-bold uppercase tracking-widest shadow-neo-sm 
+    @apply border-4 border-black dark:border-white bg-accent text-white px-8 py-4 font-bold uppercase tracking-widest shadow-neo-sm 
            transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
   }
 
   .neo-card {
-    @apply border-4 border-black bg-white p-5 sm:p-8 shadow-neo transition-all duration-200 hover:-translate-y-1 hover:shadow-neo-lg;
+    @apply border-4 border-black dark:border-white bg-white dark:bg-black p-5 sm:p-8 shadow-neo transition-all duration-200 hover:-translate-y-1 hover:shadow-neo-lg;
   }
 
   .bg-halftone {
@@ -50,9 +69,18 @@
     opacity: 0.1;
   }
 
+  .dark .bg-halftone {
+    background-image: radial-gradient(#fff 1.5px, transparent 1.5px);
+    opacity: 0.12;
+  }
+
   .text-outline {
     -webkit-text-stroke: 2px black;
     color: transparent;
+  }
+
+  .dark .text-outline {
+    -webkit-text-stroke: 2px white;
   }
 
   @keyframes marquee {

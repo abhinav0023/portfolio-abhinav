@@ -13,7 +13,7 @@ const Hero = ({ headline }) => {
         className="absolute top-28 right-4 md:right-12 lg:right-16 z-20 hidden lg:block pointer-events-none"
         aria-hidden
       >
-        <Star size={120} className="fill-secondary border-4 border-black p-4 bg-white" />
+        <Star size={120} className="fill-secondary border-4 border-black dark:border-white p-4 bg-white dark:bg-black" />
       </Motion.div>
 
       <div className="max-w-4xl xl:max-w-5xl w-full mx-auto relative z-10 flex flex-col items-center text-center">
@@ -22,12 +22,12 @@ const Hero = ({ headline }) => {
           animate={{ opacity: 1, y: 0 }}
           className="space-y-6 flex flex-col items-center"
         >
-          <div className="inline-block bg-accent text-white px-4 py-1 border-4 border-black shadow-neo-sm rotate-1 font-black uppercase tracking-widest text-sm">
+          <div className="inline-block bg-accent text-white px-4 py-1 border-4 border-black dark:border-white shadow-neo-sm rotate-1 font-black uppercase tracking-widest text-sm">
             NEW VERSION 2026.0
           </div>
 
           <h1 className="text-[clamp(4rem,12vw,10rem)] leading-[0.8] mb-4 md:mb-8 flex flex-col items-center">
-            <span className="bg-secondary border-4 border-black px-4 py-2 -rotate-1 inline-block mb-2">
+            <span className="bg-secondary border-4 border-black dark:border-white px-4 py-2 -rotate-1 inline-block mb-2 text-black">
               ABHINAV.
             </span>
             <span className="text-outline">HOODA</span>
@@ -41,7 +41,7 @@ const Hero = ({ headline }) => {
             <a href="#projects" className="neo-btn scale-110">
               View Experiments
             </a>
-            <a href="#contact" className="neo-btn bg-white text-black">
+            <a href="#contact" className="neo-btn bg-white text-black dark:bg-black dark:text-white">
               Send Message
             </a>
           </div>
