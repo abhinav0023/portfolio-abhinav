@@ -3,11 +3,8 @@ export const portfolioData = {
     name: "Abhinav Hooda",
     headline: "SDE | DevOps | Next.js | AWS | CI/CD | Cloud | Linux | Automation",
     location: "Rohtak, Haryana, India",
-    about: `I am a Software Engineer focused on full-stack development and cloud-native applications, with expertise in React.js, Next.js, Node.js, and TypeScript. I build scalable, production-ready systems with well-designed REST APIs and efficient database management (SQL & NoSQL).
-
-I have hands-on experience with AWS (EC2, S3) and DevOps practices such as CI/CD, automation via CLI tools, and working in Linux environments. My work includes deployment workflows, server configuration, and API integrations, giving me a solid understanding of system design and application lifecycle.
-
-I prioritize clean, maintainable code, performance optimization, and building reliable systems, with a strong interest in combining frontend engineering with cloud infrastructure.`,
+    about:
+      "I am a Software Engineer focused on full-stack development and cloud-native applications, with expertise in React.js, Next.js, Node.js, and TypeScript. I build scalable, production-ready systems with well-designed REST APIs and efficient database management (SQL & NoSQL). I have hands-on experience with AWS (EC2, S3) and DevOps practices such as CI/CD, automation via CLI tools, and working in Linux environments. My work includes deployment workflows, server configuration, and API integrations, giving me a solid understanding of system design and application lifecycle. I prioritize clean, maintainable code, performance optimization, and building reliable systems, with a strong interest in combining frontend engineering with cloud infrastructure.",
     /** Label above the quote cards in About */
     aboutHighlightsTitle: "My fav quotes",
     /** Right-column neo cards in About (quotes) */
@@ -30,25 +27,24 @@ I prioritize clean, maintainable code, performance optimization, and building re
   skills: {
     core: [
       "React.js",
-      "JavaScript",
-      "Node.js",
+      "Next.js",
       "Express.js",
-      "MongoDB",
+      "Node.js",
       "Firebase",
-      "REST APIs"
+      "Tailwind CSS",
     ],
+    databases: ["MySQL", "PostgreSQL", "MongoDB"],
     devops: [
-      "AWS",
       "CI/CD",
       "Linux",
+      "AWS",
+      "Scripting",
       "Automation",
-      "Cloud Computing"
+      "Servers",
+      "Virtual machines",
+      "Cloud computing",
     ],
-    additional: [
-      "Digital Marketing",
-      "Debugging",
-      "Programming"
-    ]
+    aws: ["EC2", "SES", "S3 bucket", "ECS", "Scripting"],
   },
   experience: [
     {
@@ -118,19 +114,6 @@ I prioritize clean, maintainable code, performance optimization, and building re
       description: "Minimalist and responsive portfolio website built with React and Tailwind CSS to showcase professional experience and skills.",
       tech: ["React", "Tailwind CSS", "Lucide React"],
       link: "#"
-    }
-  ],
-  certifications: [
-    {
-      "name": "Git and GitHub Certificate",
-      "provider": "Udemy",
-      "issueDate": "Feb 2023",
-      "credentialId": "UC-b5b44e5f-fb28-4e16-b9ad-6be8ee2da7cd"
-    },
-    {
-      "name": "React JS",
-      "provider": "Infosys",
-      "issueDate": "Nov 2022"
     }
   ]
 };

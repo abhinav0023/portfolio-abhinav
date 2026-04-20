@@ -4,16 +4,16 @@ import { ExternalLink, ArrowUpRight } from 'lucide-react';
 
 const Projects = ({ projects }) => {
   return (
-    <section id="projects" className="py-32 px-4 max-w-7xl mx-auto">
+    <section id="projects" className="py-14 md:py-24 lg:py-32 px-4 max-w-7xl mx-auto mb-10 md:mb-0">
       <SectionTitle>Top Experiments</SectionTitle>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-12">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="neo-card group flex flex-col min-h-[450px]"
+            className="neo-card group flex flex-col min-h-0 md:min-h-[420px] lg:min-h-[450px]"
           >
-            <div className="bg-muted p-4 border-black border-b-4 -mx-8 -mt-8 mb-8 flex justify-between items-center">
+            <div className="bg-muted p-4 border-black border-b-4 -mx-5 -mt-5 sm:-mx-8 sm:-mt-8 mb-6 sm:mb-8 flex justify-between items-center">
               <span className="font-black uppercase tracking-widest text-xs">Project_{index + 1}</span>
               <div className="flex gap-2">
                 <div className="w-3 h-3 rounded-full bg-accent border-2 border-black"></div>

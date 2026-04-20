@@ -3,10 +3,10 @@ import SectionTitle from '../ui/SectionTitle';
 
 const Education = ({ education }) => {
   return (
-    <section id="education" className="py-32 px-4 bg-white relative">
+    <section id="education" className="py-14 md:py-24 lg:py-32 px-4 bg-white relative mb-10 md:mb-0">
       <div className="max-w-7xl mx-auto">
         <SectionTitle>Education</SectionTitle>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 lg:gap-12 mt-4 md:mt-8 lg:mt-12">
           {education.map((edu, index) => (
             <div key={index} className={`neo-card ${index % 2 === 0 ? '-rotate-1' : 'rotate-1'}`}>
               <div className="bg-secondary px-3 py-1 neo-border inline-block mb-4 font-black uppercase text-xs">

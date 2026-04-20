@@ -3,13 +3,13 @@ import SectionTitle from '../ui/SectionTitle';
 
 const Experience = ({ experience }) => {
   return (
-    <section id="experience" className="py-32 px-4 bg-muted/20 border-y-8 border-black">
+    <section id="experience" className="py-14 md:py-24 lg:py-32 px-4 bg-muted/20 border-y-4 sm:border-y-8 border-black mb-10 md:mb-0">
       <div className="max-w-7xl mx-auto">
         <SectionTitle>Work History</SectionTitle>
 
-        <div className="space-y-12">
+        <div className="space-y-6 md:space-y-10 lg:space-y-12">
           {experience.map((exp, index) => (
-            <div key={index} className="flex flex-col md:flex-row gap-8 items-start group">
+            <div key={index} className="flex flex-col md:flex-row gap-4 md:gap-8 items-start group">
               <div className="bg-secondary p-4 border-4 border-black shadow-neo-sm font-black rotate-2 group-hover:rotate-0 transition-transform text-black">
                 {exp.duration}
               </div>
