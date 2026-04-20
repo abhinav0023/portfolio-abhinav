@@ -11,7 +11,15 @@ import Certifications from '../components/sections/Certifications';
 import { portfolioData } from '../data/portfolioData';
 
 const Home = () => {
-  const { personalInfo, contact, skills, experience, projects, education, certifications } = portfolioData;
+  const {
+    personalInfo,
+    contact,
+    skills,
+    experience,
+    projects,
+    education,
+    certifications,
+  } = portfolioData;
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans relative">
@@ -28,12 +36,14 @@ const Home = () => {
       <Header name={personalInfo.name} />
       
       <main>
-        <Hero 
-          name={personalInfo.name} 
-          headline={personalInfo.headline} 
-        />
+        <Hero headline={personalInfo.headline} />
         
-        <About about={personalInfo.about} />
+        <About
+          about={personalInfo.about}
+          highlights={personalInfo.aboutHighlights}
+          highlightsTitle={personalInfo.aboutHighlightsTitle}
+          tags={personalInfo.aboutTags}
+        />
         
         <Experience experience={experience} />
 

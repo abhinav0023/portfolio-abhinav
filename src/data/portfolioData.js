@@ -3,7 +3,20 @@ export const portfolioData = {
     name: "Abhinav Hooda",
     headline: "SDE | DevOps | Next.js | AWS | CI/CD | Cloud | Linux | Automation",
     location: "Rohtak, Haryana, India",
-    about: "Frontend developer passionate about creating intuitive and user-friendly web applications. Specialized in React.js, JavaScript, and MERN stack. Focused on building scalable systems, optimizing user experience, and writing clean, efficient code."
+    about: "Frontend developer passionate about creating intuitive and user-friendly web applications. Specialized in React.js, JavaScript, and MERN stack. Focused on building scalable systems, optimizing user experience, and writing clean, efficient code.",
+    /** Label above the quote cards in About */
+    aboutHighlightsTitle: "My fav quotes",
+    /** Right-column neo cards in About (quotes) */
+    aboutHighlights: [
+      {
+        title: "How you do anything is how you do everything",
+      },
+      {
+        title: "A Life without regret would be.. no life at all.",
+      },
+    ],
+    /** Small tags under the about paragraph */
+    aboutTags: ["React", "Node.js", "AWS", "CI/CD"],
   },
   contact: {
     email: "abhinavhooda@example.com", // Placeholder
