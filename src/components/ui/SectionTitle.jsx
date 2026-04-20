@@ -1,0 +1,14 @@
+import React from 'react';
+
+const SectionTitle = ({ children }) => {
+  return (
+    <div className="relative mb-20 inline-block">
+      <div className="absolute -inset-2 bg-secondary border-4 border-black -rotate-2 z-0"></div>
+      <h2 className="relative z-10 text-5xl md:text-7xl font-black uppercase tracking-tight px-4 py-2 bg-white border-4 border-black shadow-neo-sm">
+        {children}
+      </h2>
+    </div>
+  );
+};
+
+export default SectionTitle;
