@@ -1,8 +1,7 @@
-name: Deploy site to gh-pages
+name: Deploy to GitHub Pages
 
-# Pushes the production build (./dist) to branch `gh-pages`.
-# GitHub Pages must use: Settings → Pages → Build from branch → gh-pages / (root).
-# Serving `main` / repo root would load dev index.html → main.jsx (blank page + MIME error).
+# Publishes ./dist via GitHub’s Pages artifact API (actions/deploy-pages).
+# Repo → Settings → Pages → Source must be: GitHub Actions (not “Deploy from a branch”).
 
 on:
   push:
@@ -10,14 +9,16 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: gh-pages-deploy
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,9 +36,21 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          force_orphan: true
+          path: ./dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
