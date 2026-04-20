@@ -14,13 +14,14 @@ const Footer = ({ contact, name }) => {
               Ready for the next high-performance engineering mission.
             </p>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4 sm:gap-6 items-start">
               {contact.email && (
                 <a
                   href={`mailto:${contact.email}`}
-                  className="neo-btn flex justify-between items-center bg-accent text-white group"
+                  className="neo-btn inline-flex w-fit max-w-full items-center gap-4 sm:gap-6 bg-accent text-white group shrink-0"
                 >
-                  Email Me <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+                  <span>Email Me</span>
+                  <ArrowRight className="shrink-0 group-hover:translate-x-2 transition-transform" size={20} />
                 </a>
               )}
               {contact.linkedin && (
@@ -28,9 +29,10 @@ const Footer = ({ contact, name }) => {
                   href={contact.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="neo-btn flex justify-between items-center bg-white text-black group"
+                  className="neo-btn inline-flex w-fit max-w-full items-center gap-4 sm:gap-6 bg-white text-black group shrink-0"
                 >
-                  LinkedIn <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+                  <span>LinkedIn</span>
+                  <ArrowRight className="shrink-0 group-hover:translate-x-2 transition-transform" size={20} />
                 </a>
               )}
             </div>
