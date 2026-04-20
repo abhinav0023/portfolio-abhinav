@@ -3,7 +3,11 @@ export const portfolioData = {
     name: "Abhinav Hooda",
     headline: "SDE | DevOps | Next.js | AWS | CI/CD | Cloud | Linux | Automation",
     location: "Rohtak, Haryana, India",
-    about: "Frontend developer passionate about creating intuitive and user-friendly web applications. Specialized in React.js, JavaScript, and MERN stack. Focused on building scalable systems, optimizing user experience, and writing clean, efficient code.",
+    about: `I am a Software Engineer focused on full-stack development and cloud-native applications, with expertise in React.js, Next.js, Node.js, and TypeScript. I build scalable, production-ready systems with well-designed REST APIs and efficient database management (SQL & NoSQL).
+
+I have hands-on experience with AWS (EC2, S3) and DevOps practices such as CI/CD, automation via CLI tools, and working in Linux environments. My work includes deployment workflows, server configuration, and API integrations, giving me a solid understanding of system design and application lifecycle.
+
+I prioritize clean, maintainable code, performance optimization, and building reliable systems, with a strong interest in combining frontend engineering with cloud infrastructure.`,
     /** Label above the quote cards in About */
     aboutHighlightsTitle: "My fav quotes",
     /** Right-column neo cards in About (quotes) */
@@ -16,7 +20,7 @@ export const portfolioData = {
       },
     ],
     /** Small tags under the about paragraph */
-    aboutTags: ["React", "Node.js", "AWS", "CI/CD"],
+    aboutTags: ["React", "Next.js", "TypeScript", "AWS"],
   },
   contact: {
     email: "abhinavhooda@example.com", // Placeholder

@@ -8,7 +8,7 @@ const About = ({ about, highlights, highlightsTitle, tags }) => {
         <div className="lg:col-span-7">
           <SectionTitle>About Me</SectionTitle>
           <div className="bg-secondary p-12 border-4 border-black shadow-neo -rotate-1 hover:rotate-0 transition-transform cursor-help">
-            <p className="text-2xl md:text-3xl font-black uppercase leading-[1.1] mb-8 text-black">
+            <p className="text-lg md:text-xl font-bold leading-relaxed mb-8 text-black whitespace-pre-line">
               {about}
             </p>
             <div className="h-4 bg-black w-32 mb-8"></div>
