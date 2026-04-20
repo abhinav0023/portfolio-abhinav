@@ -2,12 +2,29 @@
 
 This guide walks you through hosting this portfolio on your GoDaddy-purchased domain `abhinavhooda.in` via GitHub Pages.
 
-> What I already did for you in this repo:
-> - Added `public/CNAME` containing `abhinavhooda.in` (Vite copies it to `dist/` on build, which GitHub Pages reads to bind the custom domain).
-> - Added `.github/workflows/deploy.yml` — a GitHub Actions workflow that builds and deploys `dist/` to GitHub Pages on every push to `main`.
-> - Left `vite.config.js` `base` at the default `/` (correct for a custom domain — do **not** set `base: '/portfolio-abhinav/'`).
+> What this repo includes:
+> - `public/CNAME` → `abhinavhooda.in` (copied into `dist/` on build for the custom domain).
+> - `.github/workflows/deploy.yml` → builds with Vite and deploys **only** `./dist` to GitHub Pages.
+> - `vite.config.js` → `base: '/'` (required for a custom apex domain; do **not** use `base: '/portfolio-abhinav/'` here).
+> - `public/.nojekyll` → copied to `dist/` so GitHub Pages does not run Jekyll on your static assets.
 
 You still need to do the steps below manually because they involve your GitHub repo settings and your GoDaddy DNS panel.
+
+---
+
+## CRITICAL — Blank page + console: `main.jsx` / MIME type `text/jsx`
+
+That error means the live site is **not** your Vite build. GitHub is serving the **repository root** `index.html`, which still points at `/src/main.jsx` (source). Browsers cannot execute JSX as a module.
+
+**Fix (do this on GitHub — no “paste dist into repo root” needed):**
+
+1. Repo → **Settings** → **Pages**.
+2. Under **Build and deployment** → **Source**, choose **GitHub Actions** (not “Deploy from a branch”).
+3. Repo → **Actions** → open the latest **Deploy to GitHub Pages** run → confirm it is **green**. If it failed, open the logs (often `npm ci` or permissions); fix errors, then **Re-run workflow**.
+4. First time only: if GitHub asks you to **configure** the `github-pages` environment, approve it (**Settings** → **Environments** → `github-pages` → required reviewers off, or approve the pending deployment).
+5. Hard refresh: `Cmd + Shift + R`.
+
+After a correct deploy, **View Page Source** on `https://abhinavhooda.in` should show `<script type="module" … src="/assets/index-….js">`, **not** `/src/main.jsx`. `favicon.svg` should load (it lives in `public/` and is copied to `dist/`).
 
 ---
 
@@ -131,8 +148,10 @@ The Actions workflow will rebuild `dist/` and redeploy automatically. The `CNAME
 
 | Symptom | Likely cause / fix |
 | --- | --- |
+| Blank page; console: `main.jsx` / MIME `text/jsx` | Pages is serving **repo root** (source). Set **Pages → Source → GitHub Actions**, ensure the deploy workflow succeeds. See **CRITICAL** section above. |
+| `favicon.svg` 404 | Same as above — wrong folder is being published; built site includes `favicon.svg` at site root. |
 | GitHub keeps saying "Domain's DNS record could not be retrieved" | DNS hasn't propagated yet, or old GoDaddy parked `A`/`CNAME` records still exist. Delete conflicts and wait. |
-| Site loads but assets (CSS/JS) are 404 | Your `vite.config.js` has a non-`/` `base`. For a custom domain it must be `/` (default). |
+| Site loads but assets (CSS/JS) are 404 | Your `vite.config.js` has a non-`/` `base`. For a custom domain it must be `/`. |
 | `CNAME` file disappears from `gh-pages` after a deploy | Make sure `public/CNAME` exists in the repo — Vite copies everything in `public/` into `dist/` verbatim on each build. |
 | HTTPS toggle is greyed out | Wait — Let's Encrypt cert can take up to an hour after DNS resolves. |
 | `www` doesn't redirect to apex | Verify the `www` CNAME points to `abhinav0023.github.io` (your GitHub username, not the repo). |
@@ -145,4 +164,4 @@ The Actions workflow will rebuild `dist/` and redeploy automatically. The `CNAME
 - **`public/CNAME`** → tells GitHub Pages "this site should be served at `abhinavhooda.in`".
 - **`A` records (apex)** → tell DNS "send `abhinavhooda.in` traffic to GitHub's servers".
 - **`CNAME` record (www)** → tells DNS "`www.abhinavhooda.in` is an alias for `abhinav0023.github.io`".
-- **GitHub Actions workflow** → builds the Vite app and publishes `dist/` to Pages on every push to `main`.
+- **GitHub Actions workflow** → builds the Vite app and publishes **only** the `dist/` output to Pages on every push to `main` (never commit built files to the repo root for this setup).
