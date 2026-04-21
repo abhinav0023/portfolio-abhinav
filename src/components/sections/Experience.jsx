@@ -1,6 +1,9 @@
 import React from 'react';
 import SectionTitle from '../ui/SectionTitle';
 
+const DEFAULT_SUMMARY =
+  'Driven and focused performance. Implementing scalable frontend infrastructure and optimizing deployment protocols.';
+
 const Experience = ({ experience }) => {
   return (
     <section id="experience" className="py-14 md:py-24 lg:py-32 px-4 bg-muted/20 dark:bg-black border-y-4 sm:border-y-8 border-black dark:border-white mb-10 md:mb-0">
@@ -29,9 +32,17 @@ const Experience = ({ experience }) => {
                   </div>
                 </div>
 
-                <p className="text-lg font-bold opacity-80 leading-snug">
-                  Driven and focused performance. Implementing scalable frontend infrastructure and optimizing deployment protocols.
-                </p>
+                {Array.isArray(exp.bullets) && exp.bullets.length > 0 ? (
+                  <ul className="text-lg font-bold opacity-80 leading-snug list-disc pl-5 space-y-2 marker:text-accent">
+                    {exp.bullets.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-lg font-bold opacity-80 leading-snug">
+                    {exp.summary ?? DEFAULT_SUMMARY}
+                  </p>
+                )}
                 
                 <div className="mt-8 flex gap-2">
                    <div className="h-4 w-4 bg-accent border-2 border-black dark:border-white"></div>

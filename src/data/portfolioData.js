@@ -63,24 +63,28 @@ export const portfolioData = {
     },
     {
       "company": "eDynamiX Energy and Mobility Private Limited",
-      "role": "Business Analyst",
+      "role": "Technical & Management Associate",
       "type": "Full-time",
       "duration": "Jun 2025 - Sep 2025",
-      "location": "Hybrid (Gurugram, Haryana, India)"
-    },
-    {
-      "company": "Freelance",
-      "role": "Frontend Developer",
-      "type": "Freelance",
-      "duration": "Jan 2025 - Jun 2025",
-      "location": "Remote (India)"
+      "location": "Hybrid (Gurugram, Haryana, India)",
+      "bullets": [
+        "Managed technical work including the company website and related upkeep.",
+        "Helped set structure in team processes so ownership, handoffs, and delivery were clearer.",
+        "Ran coordination end to end: meetings, agendas, notes, and follow-through with stakeholders."
+      ]
     },
     {
       "company": "CloudGarage",
       "role": "Intern",
       "type": "Internship",
       "duration": "Oct 2024 - Jan 2025",
-      "location": "Remote (Gurugram, Haryana, India)"
+      "location": "Remote (Gurugram, Haryana, India)",
+      "bullets": [
+        "Worked on Azure fundamentals, including resource groups, subscriptions, and basic service management.",
+        "Deployed and managed Azure Virtual Machines (VMs), including configuration, monitoring, and access control.",
+        "Gained hands-on experience with core cloud computing concepts such as IaaS, PaaS, SaaS, scalability, and high availability.",
+        "Deployed and configured 5+ Azure Virtual Machines (Linux & Windows) with proper access control (SSH/RDP)."
+      ]
     }
   ],
   education: [
