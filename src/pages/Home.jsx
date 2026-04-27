@@ -7,6 +7,8 @@ import Skills from '../components/sections/Skills';
 import Experience from '../components/sections/Experience';
 import Projects from '../components/sections/Projects';
 import Education from '../components/sections/Education';
+import ScrollProgress from '../components/ui/ScrollProgress';
+import BackToTop from '../components/ui/BackToTop';
 import { portfolioData } from '../data/portfolioData';
 
 const Home = () => {
@@ -31,28 +33,30 @@ const Home = () => {
         </svg>
       </div>
 
+      <ScrollProgress />
       <Header name={personalInfo.name} />
-      
+
       <main>
         <Hero headline={personalInfo.headline} />
-        
+
         <About
           about={personalInfo.about}
           highlights={personalInfo.aboutHighlights}
           highlightsTitle={personalInfo.aboutHighlightsTitle}
           tags={personalInfo.aboutTags}
         />
-        
+
         <Experience experience={experience} />
 
         <Education education={education} />
-        
+
         <Skills skills={skills} />
-        
+
         <Projects projects={projects} />
       </main>
 
       <Footer contact={contact} name={personalInfo.name} />
+      <BackToTop />
     </div>
   );
 };

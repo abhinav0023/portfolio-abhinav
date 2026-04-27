@@ -1,5 +1,7 @@
 import React from 'react';
+import { motion as Motion } from 'framer-motion';
 import SectionTitle from '../ui/SectionTitle';
+import ScrollReveal from '../ui/ScrollReveal';
 
 const Skills = ({ skills }) => {
   const allSkills = skills ? Object.values(skills).flat() : [];
@@ -11,7 +13,13 @@ const Skills = ({ skills }) => {
       </div>
 
       {/* Primary Marquee (Custom CSS Implementation) */}
-      <div className="bg-secondary py-6 sm:py-10 border-y-4 border-black dark:border-white rotate-1 scale-100 sm:scale-105 mb-10 sm:mb-16 md:mb-24 overflow-hidden flex text-black">
+      <Motion.div
+        initial={{ opacity: 0, scaleX: 0.7, rotate: 0 }}
+        whileInView={{ opacity: 1, scaleX: 1, rotate: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
+        className="bg-secondary py-6 sm:py-10 border-y-4 border-black dark:border-white scale-100 sm:scale-105 mb-10 sm:mb-16 md:mb-24 overflow-hidden flex text-black"
+      >
         <div className="flex whitespace-nowrap animate-marquee">
           {[...allSkills, ...allSkills, ...allSkills].map((skill, i) => (
             <div key={i} className="flex items-center">
@@ -22,32 +30,48 @@ const Skills = ({ skills }) => {
             </div>
           ))}
         </div>
-      </div>
+      </Motion.div>
 
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
         {skills &&
           Object.entries(skills).map(([category, items], idx) => {
             const tilts = ['-rotate-1', 'rotate-2', 'rotate-1', '-rotate-2'];
             const tilt = tilts[idx % tilts.length];
+            const direction = idx % 2 === 0 ? 'left' : 'right';
             return (
-          <div
-            key={category}
-            className={`neo-card ${idx % 2 === 0 ? 'bg-white dark:bg-black' : 'bg-muted'} ${tilt}`}
-          >
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-black mb-4 sm:mb-6 uppercase bg-black text-white dark:bg-white dark:text-black px-3 py-1 sm:px-4 inline-block">
-              {category}
-            </h3>
-            <div className="flex flex-wrap gap-2 sm:gap-3">
-              {items.map((skill) => (
-                <span
-                  key={skill}
-                  className="px-2 py-0.5 sm:px-3 sm:py-1 bg-white dark:bg-black dark:text-white border-2 sm:border-4 border-black dark:border-white font-bold text-xs sm:text-sm uppercase"
+              <ScrollReveal
+                key={category}
+                direction={direction}
+                delay={idx * 0.1}
+                duration={0.7}
+              >
+                <div
+                  className={`neo-card ${idx % 2 === 0 ? 'bg-white dark:bg-black' : 'bg-muted'} ${tilt}`}
                 >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-black mb-4 sm:mb-6 uppercase bg-black text-white dark:bg-white dark:text-black px-3 py-1 sm:px-4 inline-block">
+                    {category}
+                  </h3>
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
+                    {items.map((skill, i) => (
+                      <Motion.span
+                        key={skill}
+                        initial={{ opacity: 0, y: 12, scale: 0.85 }}
+                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                        viewport={{ once: true, amount: 0.6 }}
+                        transition={{
+                          duration: 0.4,
+                          delay: idx * 0.1 + 0.15 + i * 0.04,
+                          ease: [0.215, 0.61, 0.355, 1],
+                        }}
+                        whileHover={{ scale: 1.08, rotate: -2 }}
+                        className="px-2 py-0.5 sm:px-3 sm:py-1 bg-white dark:bg-black dark:text-white border-2 sm:border-4 border-black dark:border-white font-bold text-xs sm:text-sm uppercase inline-block"
+                      >
+                        {skill}
+                      </Motion.span>
+                    ))}
+                  </div>
+                </div>
+              </ScrollReveal>
             );
           })}
       </div>
