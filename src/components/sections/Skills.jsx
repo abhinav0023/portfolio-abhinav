@@ -18,7 +18,7 @@ const Skills = ({ skills }) => {
         whileInView={{ opacity: 1, scaleX: 1, rotate: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
-        className="bg-secondary py-6 sm:py-10 border-y-4 border-black dark:border-white scale-100 sm:scale-105 mb-10 sm:mb-16 md:mb-24 overflow-hidden flex text-black"
+        className="bg-secondary py-6 sm:py-10 border-y-4 border-black dark:border-white mb-10 sm:mb-16 md:mb-24 overflow-hidden flex text-black"
       >
         <div className="flex whitespace-nowrap animate-marquee">
           {[...allSkills, ...allSkills, ...allSkills].map((skill, i) => (

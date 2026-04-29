@@ -23,6 +23,7 @@
   html {
     scroll-behavior: smooth;
     --neo-shadow: #000000;
+    overflow-x: clip;
   }
 
   html.dark {
@@ -38,6 +39,7 @@
   }
 
   body {
+    overflow-x: clip;
     background-color: #FFFDF5;
     color: #000000;
     font-family: "Space Grotesk", sans-serif;
